@@ -1,0 +1,91 @@
+{
+  "name": "maui-mango",
+  "displayName": "MAUI Mango",
+  "description": "Create XAML files with code-behind and ViewModels for .NET MAUI projects",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahmed0Ghaith/maui-mango.git"
+  },
+  "publisher": "Ahmed Ghaith",
+  "keywords": [
+    "maui",
+    "xaml",
+    "dotnet",
+    "viewmodel",
+    "mvvm"
+  ],
+  "activationEvents": [
+    "onLanguage:xml",
+    "onLanguage:csharp"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mauiMango.createXamlPage",
+        "title": "Create XAML Page with Code-behind",
+        "category": "MAUI Mango"
+      },
+      {
+        "command": "mauiMango.createXamlPageWithVM",
+        "title": "Create XAML Page with Code-behind and ViewModel",
+        "category": "MAUI Mango"
+      },
+      {
+        "command": "mauiMango.createViewModel",
+        "title": "Create ViewModel",
+        "category": "MAUI Mango"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "mauiMango.createXamlPage",
+          "group": "mauiMango@1"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "mauiMango.createXamlPageWithVM",
+          "group": "mauiMango@2"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "mauiMango.createViewModel",
+          "group": "mauiMango@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "mauiMango.createXamlPage",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mauiMango.createXamlPageWithVM",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mauiMango.createViewModel",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+}
