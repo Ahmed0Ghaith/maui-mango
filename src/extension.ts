@@ -14,10 +14,40 @@ export function activate(context: vscode.ExtensionContext) {
 
   let createViewModel = vscode.commands.registerCommand('mauiMango.createViewModel',
     (uri: vscode.Uri) => createViewModelCommand(uri));
+  let createMauiProject = vscode.commands.registerCommand('mauiMango.createMauiProject',
+     (Uri: vscode.Uri) => createMauiProjectCommand(Uri));
 
   context.subscriptions.push(createXamlPage, createXamlPageWithVM, createViewModel);
 }
 
+
+async function createMauiProjectCommand(uri: vscode.Uri) {
+  try {
+  const folderUri = await vscode.window.showOpenDialog({
+    canSelectFolders: true,
+    openLabel: 'Select Folder to Create Project'
+  });
+
+  if (!folderUri || folderUri.length === 0) return;
+
+  const projectName = await vscode.window.showInputBox({
+    prompt: 'Enter the project name',
+    placeHolder: 'e.g., MyMauiApp'
+  });
+
+  if (!projectName) return;
+
+  const fullPath = path.join(folderUri[0].fsPath, projectName);
+  const terminal = vscode.window.createTerminal("Create MAUI Project");
+  terminal.show();
+  terminal.sendText(`dotnet new maui -n ${projectName} -o "${fullPath}"`);
+  vscode.window.showInformationMessage(`Creating MAUI project '${projectName}'...`);
+} catch (error) {
+  vscode.window.showErrorMessage(`Error creating MAUI project: ${error}`);
+}
+}
+
+  
 async function createXamlPageCommand(uri: vscode.Uri) {
   const folderPath = uri ? uri.fsPath : getActiveWorkspaceFolder();
   if (!folderPath) return;

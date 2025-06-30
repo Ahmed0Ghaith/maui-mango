@@ -2,7 +2,7 @@
   "name": "maui-mango",
   "displayName": "MAUI Mango",
   "description": "Create XAML files with code-behind and ViewModels for .NET MAUI projects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -13,7 +13,8 @@
     "type": "git",
     "url": "https://github.com/Ahmed0Ghaith/maui-mango.git"
   },
-  "publisher": "Ahmed Ghaith",
+  "icon": "assets/logo.png",
+  "publisher": "AhmedGhaith",
   "keywords": [
     "maui",
     "xaml",
@@ -74,6 +75,16 @@
         {
           "command": "mauiMango.createViewModel",
           "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mauiMango.createMauiProject",
+          "title": "Create New MAUI Project"
+        }
+      ],"viewsWelcome": [
+        {
+          "view": "explorer",
+          "contents": "🌴 **MAUI Mango**: [Create New MAUI Project](command:mauiMango.createMauiProject)",
+          "when": "!workspaceFolderCount"
         }
       ]
     }
